@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設定（全オプション） - ProfilePage Maker マニュアル</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+    <button class="hamburger-btn" aria-label="メニューを開く">&#9776;</button>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:#fff;">ProfilePage Maker</h2>
+            <span class="version">v1.0.0</span>
+            <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
+        </div>
+        <ul>
+            <li><a href="index.html">概要</a></li>
+            <li><a href="setup.html">インストール・初期設定</a></li>
+            <li><a href="profile.html">プロフィールの作成・編集</a></li>
+            <li><a href="structured-data.html">構造化データ (JSON-LD)</a></li>
+            <li><a href="url-settings.html">設定（全オプション）</a></li>
+            <li><a href="custom-blocks.html">カスタムブロックとショートコード</a></li>
+            <li><a href="troubleshooting.html">トラブルシューティング</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1>設定（全オプション）</h1>
+        <p class="lead">「設定」タブは <strong>基本設定 / 構造化データ (JSON-LD) / 投稿タイプ挙動 / 表示オプション</strong> の 4 つのカードで構成されています。このページではすべてのオプションを初期値つきで解説します。この画面の変更には管理者権限 (manage_options) が必要です。</p>
+
+        <section>
+            <h2>1. 基本設定</h2>
+            <p>ショートコードを ID 省略で使ったときに表示される「代表プロフィール」を指定します。</p>
+            <table>
+                <thead><tr><th>オプション</th><th>形式</th><th>初期値</th><th>説明</th></tr></thead>
+                <tbody>
+                    <tr><td>メインプロフィール</td><td>選択</td><td>最新を自動選択</td><td><code>[kashiwazaki_profilepage]</code> を ID 省略で使ったときに表示されるプロフィール。未指定なら最新の公開プロフィールが使われます。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>2. 構造化データ (JSON-LD)</h2>
+            <p>schema.org の ProfilePage + Person の出力、speakable、パンくずを制御します。出力される型の詳細は「<a href="structured-data.html">構造化データ (JSON-LD)</a>」を参照してください。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/04-settings-jsonld.png" alt="設定画面の基本設定と構造化データ (JSON-LD) セクション" class="lightbox-trigger">
+                <figcaption>図: 基本設定と構造化データ (JSON-LD) の設定カード</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>オプション</th><th>形式</th><th>初期値</th><th>説明</th></tr></thead>
+                <tbody>
+                    <tr><td>JSON-LD を出力する</td><td>チェック</td><td>ON</td><td>ProfilePage + Person 構造化データをフロントに自動出力します。OFF で SEO 機能を完全に止められます。</td></tr>
+                    <tr><td>出力位置</td><td>選択 (wp_head / wp_footer)</td><td>wp_head (推奨)</td><td>通常は wp_head。テーマやキャッシュ系プラグインと head 出力が衝突する場合のみ wp_footer を選びます。</td></tr>
+                    <tr><td>speakable プロパティを出力する</td><td>チェック</td><td>ON</td><td>AI 音声読み上げ (LLMO) 向けの speakable 指定を、プロフィールの見出し・概要に付与します。</td></tr>
+                    <tr><td>BreadcrumbList を自動出力する</td><td>チェック</td><td>ON</td><td>パンくず構造化データ (ホーム → プロフィール → 個人名) を自動出力します。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>3. 投稿タイプ挙動</h2>
+            <p>プロフィール投稿タイプが WordPress 内でどう振る舞うか、および公開 URL の構造を設定します。</p>
+
+            <h3>URL プレフィックス・レジストリ</h3>
+            <p>プロフィールページの親ディレクトリ (プレフィックス) を複数登録できます。各プロフィールの編集画面で、ここに登録したプレフィックスを 1 つ選択します。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/04b-settings-url.png" alt="URL プレフィックス・レジストリと挙動モードの設定" class="lightbox-trigger">
+                <figcaption>図: URL プレフィックス・レジストリ (profile / people …) と挙動モード</figcaption>
+            </figure>
+            <ul>
+                <li><code>profile</code> はデフォルトとして常に登録され、<strong>削除できません</strong>。</li>
+                <li>使える文字は英数・<code>-</code>・<code>_</code>・<code>/</code>。<code>team/about</code> のような多段プレフィックスも可能です。</li>
+                <li>予約 slug (<code>wp-admin</code> / <code>feed</code> 等) や既存の固定ページ名は自動的に拒否されます。</li>
+                <li>公開 URL は <code>http://example.com/{プレフィックス}/{スラッグ}/</code> の形になります。</li>
+                <li>最大 20 件まで登録できます。空欄の行は未登録として無視されます。</li>
+                <li><strong>使用中のプレフィックスは削除できません。</strong> 先に各プロフィールの選択を変更してください。</li>
+                <li>プレフィックスを変更しても、旧 URL から新 URL へ 301 リダイレクトされ、SEO 評価が引き継がれます。</li>
+            </ul>
+
+            <table>
+                <thead><tr><th>オプション</th><th>形式</th><th>初期値</th><th>説明</th></tr></thead>
+                <tbody>
+                    <tr><td>URL プレフィックス・レジストリ</td><td>テキスト (複数行)</td><td>profile</td><td>上記参照。最大 20 件。</td></tr>
+                    <tr><td>ルート URL (/{スラッグ}/) で公開する</td><td>チェック</td><td>OFF (非推奨)</td><td>後方互換用。プレフィックスが 1 件でも登録されていれば (＝常時) ルート公開は併用されません。通常は不要です。</td></tr>
+                    <tr><td>挙動モード</td><td>選択</td><td>プラグイン独自 CPT (推奨)</td><td>下表の 3 モード。3 モードとも動作確認済み (HTTP 200) で、データを壊さずに切り替えできます。変更時は CPT を再登録し、リライトルールを自動再生成します。</td></tr>
+                </tbody>
+            </table>
+
+            <h3>挙動モードの 3 種類</h3>
+            <table>
+                <thead><tr><th>モード</th><th>説明</th></tr></thead>
+                <tbody>
+                    <tr><td>プラグイン独自 CPT (推奨)</td><td>administrator / editor ロールに専用権限を付与し、WordPress 組み込み権限と独立して動作します。テーマに依存しません。</td></tr>
+                    <tr><td>投稿型 (post)</td><td>WordPress 投稿の権限・テーマの single レイアウトを継承します。既存ブログ運用に同居させやすいモードです。</td></tr>
+                    <tr><td>固定ページ型 (page)</td><td>WordPress 固定ページの権限・階層 (親ページ / メニュー順) を継承します。静的なプロフィールに最適です。</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>4. 表示オプション</h2>
+            <p>フロントでのプロフィール表示の構成 (スキルの統合表示・SNS リンクの見た目・セクション順序) を設定します。</p>
+            <table>
+                <thead><tr><th>オプション</th><th>形式</th><th>初期値</th><th>説明</th></tr></thead>
+                <tbody>
+                    <tr><td>「趣味・特技」セクションに「スキル」を統合表示する</td><td>チェック</td><td>OFF</td><td>OFF: スキルは「専門性・知識」セクションのみに表示。ON: 「趣味・特技」セクションにスキル一覧＋趣味テキストをまとめて表示し、「専門性」側のスキル重複表示を抑えます。</td></tr>
+                    <tr><td>SNS / 外部プロフィール リンクに文字ラベルを表示する</td><td>チェック</td><td>OFF</td><td>OFF: アイコンのみ表示 (シンプル)。ON: アイコン＋ラベルテキストを並べて表示します。</td></tr>
+                    <tr><td>セクション表示順序 プリセット</td><td>選択</td><td>標準</td><td>下記 2 種。anchor id (#ksppm-bio 等) は維持されるため、既存リンクとの互換性があります。</td></tr>
+                </tbody>
+            </table>
+
+            <h3>表示順プリセットの 2 種類</h3>
+            <table>
+                <thead><tr><th>プリセット</th><th>セクションの並び順</th></tr></thead>
+                <tbody>
+                    <tr><td>標準 (default)</td><td>経歴 → 専門性 → 書籍 → 論文 → 特許 → 商標 → 取材 → 講演 → ツール → 動画 → 趣味</td></tr>
+                    <tr><td>page7 風 (page7_like)</td><td>来歴 → 基本情報 → SNS → 動画 → 現職 → 経歴 → 趣味 → ツール → 商標 → 論文 → 書籍 → 取材 → 講演</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <nav class="page-nav">
+            <a href="structured-data.html" class="prev">&laquo; 構造化データ (JSON-LD)</a>
+            <a href="custom-blocks.html" class="next">カスタムブロックとショートコード &raquo;</a>
+        </nav>
+
+        <footer class="manual-footer">
+            <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+        </footer>
+    </main>
+
+    <div class="lightbox"></div>
+    <script src="js/manual.js?v=1"></script>
+</body>
+</html>

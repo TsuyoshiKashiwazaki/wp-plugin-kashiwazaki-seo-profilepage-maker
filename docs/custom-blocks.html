@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カスタムブロックとショートコード - ProfilePage Maker マニュアル</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+    <button class="hamburger-btn" aria-label="メニューを開く">&#9776;</button>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:#fff;">ProfilePage Maker</h2>
+            <span class="version">v1.0.0</span>
+            <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
+        </div>
+        <ul>
+            <li><a href="index.html">概要</a></li>
+            <li><a href="setup.html">インストール・初期設定</a></li>
+            <li><a href="profile.html">プロフィールの作成・編集</a></li>
+            <li><a href="structured-data.html">構造化データ (JSON-LD)</a></li>
+            <li><a href="url-settings.html">設定（全オプション）</a></li>
+            <li><a href="custom-blocks.html">カスタムブロックとショートコード</a></li>
+            <li><a href="troubleshooting.html">トラブルシューティング</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1>カスタムブロックとショートコード</h1>
+        <p class="lead">標準の項目に当てはまらないコンテンツは「カスタムブロック」で追加でき、作成したプロフィールはショートコードで任意のページに埋め込めます。</p>
+
+        <section>
+            <h2>カスタムブロック</h2>
+            <p>「カスタムブロック」タブでは、「公開中の無料システムツール」「監修・共同開発システムツール」など、<strong>任意の名称のブロック</strong> を作成できます。各ブロックの中に、見出し・説明・URL・画像を持つ項目を繰り返し追加できます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/05-custom-blocks.png" alt="カスタムブロックの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: カスタムブロック (ブロック名と、見出し・説明・URL・画像を持つ項目)</figcaption>
+            </figure>
+            <ul>
+                <li>1 つのプロフィールに最大 20 ブロック、各ブロックに最大 50 項目まで追加できます。</li>
+                <li>ツール紹介・ポートフォリオ・提供サービスなど、自由な用途で使えます。</li>
+            </ul>
+            <div class="callout callout-tip">
+                <p>以前のバージョンで「公開中のツール」「監修・共同開発ツール」として登録した内容は、カスタムブロックへ自動的に引き継がれます。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>ショートコードでの埋め込み</h2>
+            <p>固定ページや投稿の本文にショートコードを貼り付けると、プロフィールをその場に表示できます。3 つのエイリアス (別名) があり、どれも同じ機能です。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/06-usage-shortcode.png" alt="使い方タブのショートコード一覧" class="lightbox-trigger">
+                <figcaption>図: 「使い方」タブのショートコード一覧 (クリックでコピー)</figcaption>
+            </figure>
+            <table>
+                <thead>
+                    <tr><th>ショートコード</th><th>動作</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>[kashiwazaki_profilepage]</code></td><td>メインプロフィール (設定で指定したもの、未指定なら最新) を全文表示</td></tr>
+                    <tr><td><code>[kashiwazaki_profilepage id="123"]</code></td><td>ID 指定のプロフィールを表示</td></tr>
+                    <tr><td><code>[kashiwazaki_profilepage section="basic"]</code></td><td>特定セクションのみ表示</td></tr>
+                    <tr><td><code>[kashiwazaki_profilepage layout="page7_like"]</code></td><td>page7 風レイアウトで表示</td></tr>
+                    <tr><td><code>[kashiwazaki_profile]</code></td><td>同上 (短縮名エイリアス)</td></tr>
+                    <tr><td><code>[ksppm_profile]</code></td><td>同上 (汎用名エイリアス)</td></tr>
+                </tbody>
+            </table>
+            <h3>属性の一覧</h3>
+            <table>
+                <thead><tr><th>属性</th><th>初期値</th><th>指定できる値 / 説明</th></tr></thead>
+                <tbody>
+                    <tr><td><code>id</code></td><td>0 (＝設定のメインプロフィール、なければ最新)</td><td>表示するプロフィールの投稿 ID</td></tr>
+                    <tr><td><code>section</code></td><td><code>all</code></td><td><code>all</code> / <code>basic</code> / <code>career</code> / <code>expertise</code> / <code>works</code> / <code>tools</code> / <code>media</code> / <code>contact</code></td></tr>
+                    <tr><td><code>layout</code></td><td><code>default</code></td><td><code>default</code> / <code>page7_like</code> (表示順プリセット)</td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-tip">
+                <p><code>id</code> を省略すると、設定の「メインプロフィール」で指定したプロフィールが表示されます。指定がない場合は最新の公開プロフィールが使われます。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>フロントでの表示</h2>
+            <p>プロフィールページや埋め込み先では、顔写真・氏名・肩書・自己紹介・来歴などが整ったレイアウトで表示されます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/07-frontend-header.png" alt="フロントに表示されたプロフィールのヘッダー" class="lightbox-trigger">
+                <figcaption>図: フロントに表示されたプロフィール (顔写真・氏名・肩書・自己紹介・来歴)</figcaption>
+            </figure>
+        </section>
+
+        <nav class="page-nav">
+            <a href="url-settings.html" class="prev">&laquo; 設定（全オプション）</a>
+            <a href="troubleshooting.html" class="next">トラブルシューティング &raquo;</a>
+        </nav>
+
+        <footer class="manual-footer">
+            <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+        </footer>
+    </main>
+
+    <div class="lightbox"></div>
+    <script src="js/manual.js?v=1"></script>
+</body>
+</html>

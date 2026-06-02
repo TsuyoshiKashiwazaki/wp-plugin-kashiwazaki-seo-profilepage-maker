@@ -1,0 +1,35 @@
+# F10: 配布パッケージ (wp.org SVN / GitHub release zip) から除外するパス。
+# 個人サイト固有の一回限り移行スクリプト・開発時資産を配布物に含めない。
+# wp-cli dist-archive / 各種ビルドツールが本ファイルを解釈する。
+
+# 個人サイト固有の移行/診断 CLI (ハードコードされた投稿 ID に依存、配布版では不要)
+bin/
+
+# バージョン管理・開発設定
+.git/
+.gitignore
+.gitattributes
+.distignore
+
+# 開発・テスト資産
+tests/
+node_modules/
+vendor/
+*.dist
+
+# AI レビュー・開発ツールの作業ディレクトリ (配布物に混入させない、監査ログ等)
+.3ai-work/
+.playwright-mcp/
+.claude/
+.tmp/
+*.jsonl
+CLAUDE.md
+composer.json
+composer.lock
+package.json
+package-lock.json
+
+# OS / エディタ生成物
+.DS_Store
+Thumbs.db
+*.log

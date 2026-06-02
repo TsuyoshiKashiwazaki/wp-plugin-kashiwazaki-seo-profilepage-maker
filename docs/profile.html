@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロフィールの作成・編集 - ProfilePage Maker マニュアル</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+    <button class="hamburger-btn" aria-label="メニューを開く">&#9776;</button>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:#fff;">ProfilePage Maker</h2>
+            <span class="version">v1.0.0</span>
+            <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
+        </div>
+        <ul>
+            <li><a href="index.html">概要</a></li>
+            <li><a href="setup.html">インストール・初期設定</a></li>
+            <li><a href="profile.html">プロフィールの作成・編集</a></li>
+            <li><a href="structured-data.html">構造化データ (JSON-LD)</a></li>
+            <li><a href="url-settings.html">設定（全オプション）</a></li>
+            <li><a href="custom-blocks.html">カスタムブロックとショートコード</a></li>
+            <li><a href="troubleshooting.html">トラブルシューティング</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1>プロフィールの作成・編集</h1>
+        <p class="lead">プロフィールの入力フォームは 9 つのタブに分かれています。各タブには入力済み項目数を示す完成度ゲージ (例: <code>9/12</code>) が表示されます。このページでは全 9 タブの入力項目を 1 つずつ解説します。</p>
+
+        <section>
+            <h2>入力タブの一覧</h2>
+            <p>入力は必要なタブだけ埋めれば構いません。<strong>空欄の項目はフロントにも構造化データにも出力されません。</strong>各表の「構造化データ」列は、その項目が schema.org のどのプロパティとして出力されるか (「—」は出力なし) を示します。</p>
+            <table>
+                <thead><tr><th>#</th><th>タブ</th><th>主な内容</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><a href="#tab-basic">基本情報</a></td><td>氏名・肩書・自己紹介・来歴</td></tr>
+                    <tr><td>2</td><td><a href="#tab-identity">個人情報</a></td><td>生年月日・性別など (公開制御つき)</td></tr>
+                    <tr><td>3</td><td><a href="#tab-contact">連絡先・SNS</a></td><td>メール・電話・SNS・動画チャンネル</td></tr>
+                    <tr><td>4</td><td><a href="#tab-career">経歴・所属</a></td><td>現職・以前の経歴・学歴・資格・受賞・趣味</td></tr>
+                    <tr><td>5</td><td><a href="#tab-expertise">専門性・知識</a></td><td>専門分野・対応言語・スキル</td></tr>
+                    <tr><td>6</td><td><a href="#tab-works">著作・論文・特許</a></td><td>書籍・論文・特許・商標・取材・講演</td></tr>
+                    <tr><td>7</td><td><a href="#tab-tools">カスタムブロック</a></td><td>任意名称の繰り返しコンテンツ</td></tr>
+                    <tr><td>8</td><td><a href="#tab-inquiry">お問い合わせ</a></td><td>問い合わせ本文・フォーム URL</td></tr>
+                    <tr><td>9</td><td><a href="#tab-media">画像・メディア</a></td><td>顔写真・カバー画像</td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-tip">
+                <p>多くの項目には schema.org のプロパティが割り当てられており、入力するだけで <a href="structured-data.html">構造化データ</a> に反映されます。鍵アイコン (🔒) が付いた項目は個人情報 (PII) で、公開チェックを ON にしない限り出力されません。</p>
+            </div>
+        </section>
+
+        <section id="tab-basic">
+            <h2>1. 基本情報</h2>
+            <p>氏名・肩書・自己紹介・来歴など、プロフィールの中心となる情報を入力します。入力済みの項目には緑色のチェックが付きます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/02-edit-form-basic.png" alt="基本情報タブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: 基本情報タブ (タブごとの完成度ゲージと入力済みチェック)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目</th><th>形式</th><th>説明 / 構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>姓</td><td>テキスト</td><td>Person.familyName</td></tr>
+                    <tr><td>名</td><td>テキスト</td><td>Person.givenName</td></tr>
+                    <tr><td>氏名 (表示用)</td><td>テキスト</td><td>フロントの見出し・Person.name に使用</td></tr>
+                    <tr><td>ふりがな</td><td>テキスト</td><td>日本語ふりがな (任意) / 出力 —</td></tr>
+                    <tr><td>ローマ字 (英字表記)</td><td>テキスト</td><td>海外 SEO 対応用 / Person.alternateName</td></tr>
+                    <tr><td>ニックネーム</td><td>テキスト</td><td>Person.alternateName</td></tr>
+                    <tr><td>敬称 (前)</td><td>テキスト</td><td>Dr., 教授 等 / Person.honorificPrefix</td></tr>
+                    <tr><td>敬称 (後)</td><td>テキスト</td><td>Person.honorificSuffix</td></tr>
+                    <tr><td>現職 (肩書)</td><td>テキスト</td><td>Person.jobTitle</td></tr>
+                    <tr><td>自己紹介 (短文)</td><td>テキストエリア</td><td>1〜3 行のプレーンテキスト / Person.description</td></tr>
+                    <tr><td>来歴 (長文・リッチ)</td><td>リッチエディタ</td><td>フロント表示用 (HTML 可) / 出力 —</td></tr>
+                    <tr><td>代名詞</td><td>テキスト</td><td>he/him, she/her, they/them 等 / Person.pronouns</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-identity">
+            <h2>2. 個人情報</h2>
+            <p>生年月日・性別などの個人情報 (PII) を入力します。これらは <strong>公開チェックを ON にしない限りフロントにも構造化データにも出力されません</strong>。生年月日と出生地は 1 つのチェックでまとめて、身長と体重も 1 つのチェックでまとめて制御します。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/10-tab-identity.png" alt="個人情報タブ (公開制御トグル付き)" class="lightbox-trigger">
+                <figcaption>図: 個人情報タブ (項目ごとの公開トグルと鍵アイコン)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目</th><th>形式</th><th>説明 / 構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>生年月日 🔒</td><td>日付</td><td>Person.birthDate</td></tr>
+                    <tr><td>出生地 🔒</td><td>テキスト</td><td>Person.birthPlace.name</td></tr>
+                    <tr><td>生年月日・出生地を公開する</td><td>チェック</td><td>初期値 OFF。OFF なら上記 2 項目を出力しない</td></tr>
+                    <tr><td>国籍</td><td>テキスト</td><td>Person.nationality.name</td></tr>
+                    <tr><td>国籍を公開する</td><td>チェック</td><td>初期値 ON (後方互換)。OFF なら国籍を出力しない</td></tr>
+                    <tr><td>性別 🔒</td><td>選択 (男性 / 女性 / その他)</td><td>Person.gender</td></tr>
+                    <tr><td>性別を公開する</td><td>チェック</td><td>初期値 OFF</td></tr>
+                    <tr><td>身長 (cm) 🔒</td><td>数値</td><td>Person.height</td></tr>
+                    <tr><td>体重 (kg) 🔒</td><td>数値</td><td>Person.weight</td></tr>
+                    <tr><td>身長・体重を公開する</td><td>チェック</td><td>初期値 OFF。OFF なら身長・体重をまとめて出力しない</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-contact">
+            <h2>3. 連絡先・SNS</h2>
+            <p>メール・電話・ウェブサイト・SNS・動画チャンネルを入力します。メールと電話は PII のため、それぞれ公開チェックが必要です。SNS と動画チャンネルは行を追加して複数登録できます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/11-tab-contact.png" alt="連絡先・SNS タブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: 連絡先・SNS タブ (メール公開トグルと SNS リンクの繰り返し入力)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目</th><th>形式</th><th>説明 / 構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>メールアドレス 🔒</td><td>メール</td><td>Person.email (公開チェック ON 時のみ)</td></tr>
+                    <tr><td>メールを公開する</td><td>チェック</td><td>初期値 OFF</td></tr>
+                    <tr><td>電話番号 🔒</td><td>テキスト</td><td>Person.telephone (公開チェック ON 時のみ)</td></tr>
+                    <tr><td>電話を公開する</td><td>チェック</td><td>初期値 OFF</td></tr>
+                    <tr><td>ウェブサイト URL</td><td>URL</td><td>Person.url</td></tr>
+                    <tr><td>SNS・外部プロフィール URL</td><td>繰り返し (URL / サービス名)</td><td>Person.sameAs (配列)</td></tr>
+                    <tr><td>動画配信チャンネル</td><td>繰り返し (チャンネル名 / プラットフォーム / URL)</td><td>フロント表示用 / 出力 —</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-career">
+            <h2>4. 経歴・所属</h2>
+            <p>現職・以前の経歴・学歴・資格・受賞・趣味を入力します。各セクションは行を追加して複数登録でき、ドラッグハンドルで並べ替えできます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/12-tab-career.png" alt="経歴・所属タブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: 経歴・所属タブ (現職・所属組織と以前の経歴の繰り返し入力)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目 (繰り返し)</th><th>サブ項目</th><th>構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>現職・所属組織</td><td>組織名 / 組織 URL / 役職 / 在任開始 / 在任終了 (現職は空)</td><td>Person.worksFor (Organization)</td></tr>
+                    <tr><td>以前の経歴</td><td>組織名 / 役職 / 在任開始 / 在任終了 / 説明</td><td>出力 —</td></tr>
+                    <tr><td>学歴</td><td>学校名 / 学校 URL / 学位 / 卒業年月</td><td>Person.alumniOf (EducationalOrganization)</td></tr>
+                    <tr><td>資格・認定</td><td>資格名 / 発行機関 / 取得日 / 有効期限 / 証明 URL</td><td>Person.hasCredential</td></tr>
+                    <tr><td>受賞・表彰</td><td>賞名 / 受賞日 / 授与機関 / 関連 URL</td><td>Person.award</td></tr>
+                    <tr><td>趣味・特技</td><td>テキストエリア (1 項目)</td><td>出力 —</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-expertise">
+            <h2>5. 専門性・知識</h2>
+            <p>専門分野・対応言語・スキルを入力します。E-E-A-T (専門性・権威性・信頼性) を補強する重要な項目です。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/13-tab-expertise.png" alt="専門性・知識タブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: 専門性・知識タブ (専門分野の繰り返し入力)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目 (繰り返し)</th><th>サブ項目</th><th>構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>専門分野</td><td>トピック / Wikipedia・関連 URL</td><td>Person.knowsAbout</td></tr>
+                    <tr><td>対応言語</td><td>言語名 / 言語コード (ja, en 等)</td><td>Person.knowsLanguage</td></tr>
+                    <tr><td>スキル</td><td>スキル名 / レベル</td><td>Person.skills</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-works">
+            <h2>6. 著作・論文・特許</h2>
+            <p>書籍・学術論文・特許・商標・取材・講演を繰り返し項目として何件でも登録できます。ここに入力した実績は、フロント表示に加えて schema.org の各型 (書籍 = Book、論文 = ScholarlyArticle、特許 = CreativeWork など) として出力され、Google や AI 検索に「業績のある人物」として認識されやすくなります。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/03-works-tab.png" alt="著作・論文・特許タブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: 著作・論文・特許タブ (書籍・学術論文の繰り返し入力・並べ替え)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目 (繰り返し)</th><th>サブ項目</th><th>構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>書籍</td><td>タイトル / ISBN / 出版社 / 出版日 / URL / 表紙画像 / 概要</td><td>Person.owns (Book)</td></tr>
+                    <tr><td>学術論文</td><td>タイトル / DOI / 発行日 / 更新日 / 出版誌 / URL / PDF URL / 論文サムネイル / 要旨</td><td>Person.owns (ScholarlyArticle)</td></tr>
+                    <tr><td>特許</td><td>特許名 / 特許番号 / 出願番号 / 取得・出願日 / URL / 特許図面 / 説明</td><td>Person.owns (CreativeWork)</td></tr>
+                    <tr><td>商標登録</td><td>商標名 / 登録番号 / 出願日 / 区分 / URL</td><td>出力 —</td></tr>
+                    <tr><td>取材・執筆・監修</td><td>タイトル・メディア名 / 発行元 (法人名) / 掲載日 / 更新日 / URL / 種別 (取材・執筆・監修) / 著者・執筆者 / サムネイル画像</td><td>Person.subjectOf (Article)</td></tr>
+                    <tr><td>講演・セミナー</td><td>イベント名 / 主催 / 開催日 / 終了日 / 会場 / 会場住所 / イベント画像 / URL</td><td>Person.performerIn (Event)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-tools">
+            <h2>7. カスタムブロック</h2>
+            <p>「公開中のツール」など、標準項目に当てはまらない任意名称のコンテンツを追加できます。詳しい使い方は「<a href="custom-blocks.html">カスタムブロックとショートコード</a>」のページを参照してください。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/05-custom-blocks.png" alt="カスタムブロックタブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: カスタムブロックタブ (ブロック名と、見出し・説明・URL・画像を持つ項目)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目</th><th>サブ項目</th><th>上限 / 構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>カスタムブロック (任意名称)</td><td>各項目: 見出し / 説明 / URL / 画像</td><td>最大 20 ブロック・各 50 項目 / 出力 —</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-inquiry">
+            <h2>8. お問い合わせ</h2>
+            <p>問い合わせの案内文とフォームの URL を入力します。フロントのお問い合わせセクションに表示されます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/14-tab-inquiry.png" alt="お問い合わせタブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: お問い合わせタブ (案内文とフォーム URL)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目</th><th>形式</th><th>説明 / 構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>お問い合わせ本文</td><td>テキストエリア</td><td>案内文 (1 段落) / 出力 —</td></tr>
+                    <tr><td>お問い合わせフォーム URL</td><td>URL</td><td>フォームへのリンク / 出力 —</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tab-media">
+            <h2>9. 画像・メディア</h2>
+            <p>顔写真とカバー画像を WordPress メディアライブラリから選択します。顔写真は構造化データの画像としても使われます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/15-tab-media.png" alt="画像・メディアタブの入力フォーム" class="lightbox-trigger">
+                <figcaption>図: 画像・メディアタブ (メインプロフィール画像とカバー画像)</figcaption>
+            </figure>
+            <table>
+                <thead><tr><th>項目</th><th>形式</th><th>説明 / 構造化データ</th></tr></thead>
+                <tbody>
+                    <tr><td>メインプロフィール画像 (顔写真)</td><td>画像</td><td>フロントの顔写真・Person.image</td></tr>
+                    <tr><td>カバー画像 (バナー)</td><td>画像</td><td>フロントのバナー / 出力 —</td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-tip">
+                <p>画像は WordPress メディアライブラリにアップロード済みのものから選択します。各タブの下部にある「このタブの構造化データ (schema.org) マッピング」を開くと、その場で出力対象のプロパティを確認できます。</p>
+            </div>
+        </section>
+
+        <nav class="page-nav">
+            <a href="setup.html" class="prev">&laquo; インストール・初期設定</a>
+            <a href="structured-data.html" class="next">構造化データ (JSON-LD) &raquo;</a>
+        </nav>
+
+        <footer class="manual-footer">
+            <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+        </footer>
+    </main>
+
+    <div class="lightbox"></div>
+    <script src="js/manual.js?v=1"></script>
+</body>
+</html>

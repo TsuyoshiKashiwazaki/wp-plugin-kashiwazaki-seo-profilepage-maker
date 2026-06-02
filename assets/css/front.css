@@ -1,0 +1,232 @@
+/* Kashiwazaki SEO ProfilePage Maker - Front CSS (FRO-15 responsive, FRO-16 CSS variables) */
+
+.ksppm-profile {
+	--profile-primary-color: #2271b1;
+	--profile-accent-color: #d63638;
+	--profile-bg: #ffffff;
+	--profile-text: #2c3338;
+	--profile-muted: #646970;
+	--profile-border: #dcdcde;
+	--profile-radius: 8px;
+	max-width: 100%;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Segoe UI", sans-serif;
+	color: var(--profile-text);
+	line-height: 1.7;
+	text-align: left;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	box-sizing: border-box;
+}
+/* テーマ default のセンタリング (.entry-content h2 / ul 等) を網羅的に上書き */
+.ksppm-profile h1,
+.ksppm-profile h2,
+.ksppm-profile h3,
+.ksppm-profile h4,
+.ksppm-profile h5,
+.ksppm-profile h6,
+.ksppm-profile p,
+.ksppm-profile ul,
+.ksppm-profile ol,
+.ksppm-profile dl,
+.ksppm-profile dt,
+.ksppm-profile dd,
+.ksppm-profile li,
+.ksppm-profile section {
+	text-align: left;
+}
+
+.ksppm-hero {
+	margin-bottom: 2rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 2px solid var(--profile-border);
+}
+.ksppm-cover img {
+	width: 100%;
+	max-height: 320px;
+	object-fit: cover;
+	border-radius: var(--profile-radius);
+	margin-bottom: 1rem;
+}
+.ksppm-portrait { margin: 0 0 1rem; }
+.ksppm-portrait-img {
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 4px solid var(--profile-bg);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.ksppm-fullname {
+	font-size: 2rem;
+	margin: 0.5rem 0 0.25rem;
+	font-weight: 700;
+}
+.ksppm-kana { font-size: 1rem; font-weight: normal; color: var(--profile-muted); }
+.ksppm-romaji { color: var(--profile-muted); font-style: italic; margin: 0; }
+.ksppm-jobtitle { font-size: 1.1rem; color: var(--profile-primary-color); margin: 0.5rem 0; font-weight: 600; }
+.ksppm-summary { margin: 1rem 0; }
+
+.ksppm-toc {
+	background: #f6f7f7;
+	border-radius: var(--profile-radius);
+	padding: 1rem 1.5rem;
+	margin-bottom: 2rem;
+}
+.ksppm-toc h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.ksppm-toc ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+	gap: 0.4rem 1rem;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.ksppm-toc a { color: var(--profile-primary-color); text-decoration: none; }
+.ksppm-toc a:hover { text-decoration: underline; }
+
+.ksppm-section {
+	margin-bottom: 2.5rem;
+	scroll-margin-top: 80px;
+}
+.ksppm-section h2 {
+	font-size: 1.5rem;
+	border-left: 4px solid var(--profile-primary-color);
+	padding-left: 0.75rem;
+	margin: 0 0 1rem;
+}
+
+.ksppm-dl {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	column-gap: 1.5rem;
+	row-gap: 0.5rem;
+	margin: 0;
+}
+.ksppm-dl dt { font-weight: 600; color: var(--profile-muted); }
+.ksppm-dl dd { margin: 0; }
+
+.ksppm-sns-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	padding: 0;
+	margin: 0;
+}
+/* v0.0.25-beta: dashicons-only モード (icon-only) と label モード (with-label) */
+.ksppm-sns-list a.ksppm-sns-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+.ksppm-sns-list--icon-only a.ksppm-sns-link {
+	padding: 0.5rem;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	justify-content: center;
+}
+.ksppm-sns-list a.ksppm-sns-link .dashicons {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	line-height: 1;
+}
+.ksppm-sns-list a {
+	display: inline-block;
+	padding: 0.4rem 0.9rem;
+	background: var(--profile-primary-color);
+	color: #fff;
+	border-radius: 999px;
+	text-decoration: none;
+	font-size: 0.9rem;
+}
+
+.ksppm-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+}
+.ksppm-table th,
+.ksppm-table td {
+	padding: 0.5rem 0.75rem;
+	border-bottom: 1px solid var(--profile-border);
+	text-align: left;
+	vertical-align: top;
+}
+.ksppm-table th {
+	background: #f6f7f7;
+	font-weight: 600;
+	color: var(--profile-muted);
+}
+
+.ksppm-book-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+	gap: 1.5rem;
+}
+.ksppm-book-card {
+	background: var(--profile-bg);
+	border: 1px solid var(--profile-border);
+	border-radius: var(--profile-radius);
+	padding: 1rem;
+}
+.ksppm-book-cover img { max-width: 100%; height: auto; }
+.ksppm-book-title { font-size: 1rem; margin: 0.5rem 0; }
+.ksppm-book-pub, .ksppm-book-date, .ksppm-book-isbn { font-size: 0.85rem; color: var(--profile-muted); margin: 0.2rem 0; }
+.ksppm-btn {
+	display: inline-block;
+	padding: 0.4rem 1rem;
+	background: var(--profile-primary-color);
+	color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+	font-size: 0.9rem;
+	margin-top: 0.5rem;
+}
+
+.ksppm-section-contact p { margin: 0.5rem 0; }
+
+.ksppm-video-list { list-style: none; padding: 0; }
+.ksppm-video-list li { padding: 0.3rem 0; }
+
+.ksppm-wysiwyg img { max-width: 100%; height: auto; }
+
+.ksppm-meta-footer {
+	margin-top: 3rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--profile-border);
+	font-size: 0.85rem;
+	color: var(--profile-muted);
+}
+
+/* レスポンシブ (FRO-15) */
+@media (max-width: 600px) {
+	.ksppm-fullname { font-size: 1.5rem; }
+	.ksppm-portrait-img { width: 120px; height: 120px; }
+	.ksppm-dl { grid-template-columns: 1fr; gap: 0.2rem; }
+	.ksppm-dl dt { font-size: 0.85rem; margin-top: 0.5rem; }
+	.ksppm-toc ul { grid-template-columns: 1fr; }
+	.ksppm-table { font-size: 0.85rem; }
+}
+
+/* 印刷用 (FRO-10) */
+@media print {
+	.ksppm-toc,
+	.ksppm-btn { display: none; }
+	.ksppm-profile { color: #000; }
+	.ksppm-hero { border-bottom: 1px solid #000; }
+	.ksppm-section { page-break-inside: avoid; }
+	a { color: #000; text-decoration: underline; }
+}
+
+/* カスタムブロック (フロント表示) */
+.ksppm-block-cards { display: flex; flex-direction: column; gap: 1.2em; }
+.ksppm-block-card { display: flex; gap: 1em; align-items: flex-start; }
+.ksppm-block-card-img { flex: 0 0 auto; }
+.ksppm-block-card-img img { max-width: 120px; height: auto; border-radius: 6px; display: block; }
+.ksppm-block-card-body { flex: 1 1 auto; min-width: 0; }
+.ksppm-block-card-heading { font-weight: 600; margin: 0 0 .25em; }
+.ksppm-block-card-desc { margin: 0; }

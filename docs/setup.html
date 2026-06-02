@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インストール・初期設定 - ProfilePage Maker マニュアル</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+    <button class="hamburger-btn" aria-label="メニューを開く">&#9776;</button>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:#fff;">ProfilePage Maker</h2>
+            <span class="version">v1.0.0</span>
+            <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
+        </div>
+        <ul>
+            <li><a href="index.html">概要</a></li>
+            <li><a href="setup.html">インストール・初期設定</a></li>
+            <li><a href="profile.html">プロフィールの作成・編集</a></li>
+            <li><a href="structured-data.html">構造化データ (JSON-LD)</a></li>
+            <li><a href="url-settings.html">設定（全オプション）</a></li>
+            <li><a href="custom-blocks.html">カスタムブロックとショートコード</a></li>
+            <li><a href="troubleshooting.html">トラブルシューティング</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1>インストール・初期設定</h1>
+        <p class="lead">プラグインのインストールから最初のプロフィール作成まで、ステップバイステップで解説します。</p>
+
+        <section>
+            <h2>インストール方法</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-body">
+                    <h3>プラグインをアップロード</h3>
+                    <p>プラグインフォルダ <code>wp-plugin-kashiwazaki-seo-profilepage-maker</code> を <code>/wp-content/plugins/</code> にアップロードします。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-body">
+                    <h3>プラグインを有効化</h3>
+                    <p>WordPress 管理画面の「プラグイン」一覧から <strong>Kashiwazaki SEO ProfilePage Maker</strong> を有効化します。有効化時に URL ルーティング (リライトルール) が自動登録されます。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-body">
+                    <h3>メニューを確認</h3>
+                    <p>左メニューに <strong>Kashiwazaki SEO ProfilePage Maker</strong> が追加されます。ここからプロフィールの作成・管理を行います。</p>
+                    <figure class="screenshot">
+                        <img src="images/screenshots/00-menu-location.png" alt="管理画面サイドバーのメニュー位置" class="lightbox-trigger">
+                        <figcaption>図: 管理画面サイドバーに追加されるメニュー</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <p>有効化後にプロフィールページが 404 になる場合は、WordPress 管理画面の「設定 → パーマリンク」を一度開いて保存し、リライトルールを再生成してください。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>管理画面の構成</h2>
+            <p>メニューを開くと、以下の 4 つのタブで構成された管理画面が表示されます。</p>
+            <ul>
+                <li><strong>プロフィール一覧</strong> — 作成済みプロフィールの一覧。状態 (公開 / 下書き / 非公開 / レビュー待ち) や URL を確認し、編集・表示・削除ができます。</li>
+                <li><strong>新規プロフィール</strong> — 新しいプロフィールを作成する入力フォーム。</li>
+                <li><strong>設定</strong> — JSON-LD の出力、URL プレフィックス、表示順プリセットなどプラグイン全体の設定 (この画面のみ管理者権限が必要)。</li>
+                <li><strong>使い方</strong> — ショートコードや URL の仕組みなどの簡易ヘルプ。</li>
+            </ul>
+            <figure class="screenshot">
+                <img src="images/screenshots/01-profile-list.png" alt="プロフィール一覧画面" class="lightbox-trigger">
+                <figcaption>図: プロフィール一覧画面 (タブ・検索・状態フィルタ・操作ボタン)</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>最初のプロフィールを作成する</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-body">
+                    <p>「<strong>新規プロフィール</strong>」タブを開きます。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-body">
+                    <p>「基本情報」タブで氏名・肩書・自己紹介などを入力します。必須項目は氏名です。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-body">
+                    <p>必要に応じて他のタブ (経歴・著作・論文など) を入力し、ページ下部の保存ボタンで公開します。</p>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <p>入力フォームの詳しい使い方は「<a href="profile.html">プロフィールの作成・編集</a>」を参照してください。</p>
+            </div>
+        </section>
+
+        <nav class="page-nav">
+            <a href="index.html" class="prev">&laquo; 概要</a>
+            <a href="profile.html" class="next">プロフィールの作成・編集 &raquo;</a>
+        </nav>
+
+        <footer class="manual-footer">
+            <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+        </footer>
+    </main>
+
+    <div class="lightbox"></div>
+    <script src="js/manual.js?v=1"></script>
+</body>
+</html>

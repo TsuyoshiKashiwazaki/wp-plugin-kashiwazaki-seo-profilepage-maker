@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>概要 - ProfilePage Maker マニュアル</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+    <button class="hamburger-btn" aria-label="メニューを開く">&#9776;</button>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:#fff;">ProfilePage Maker</h2>
+            <span class="version">v1.0.0</span>
+            <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
+        </div>
+        <ul>
+            <li><a href="index.html">概要</a></li>
+            <li><a href="setup.html">インストール・初期設定</a></li>
+            <li><a href="profile.html">プロフィールの作成・編集</a></li>
+            <li><a href="structured-data.html">構造化データ (JSON-LD)</a></li>
+            <li><a href="url-settings.html">設定（全オプション）</a></li>
+            <li><a href="custom-blocks.html">カスタムブロックとショートコード</a></li>
+            <li><a href="troubleshooting.html">トラブルシューティング</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1>Kashiwazaki SEO ProfilePage Maker マニュアル</h1>
+        <img src="images/main-visual.png" alt="Kashiwazaki SEO ProfilePage Maker メインビジュアル" style="width:100%;border-radius:6px;margin:8px 0 24px;">
+        <p class="lead">schema.org の <strong>ProfilePage / Person</strong> 構造化データを完備した、SEO・E-E-A-T 強化型のプロフィールページ生成プラグインです。人物の知的資産（著作・特許・論文・取材・登壇など）を機械可読化し、Google Knowledge Graph と AI 検索の双方から認知される Authority Page を作成します。</p>
+
+        <section>
+            <h2>主要機能</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>専用プロフィール投稿タイプ</h3>
+                    <p>9 つのタブに分かれた管理画面で、氏名・肩書・経歴・著作・論文・特許・取材・講演・受賞・資格などを 1 ページに集約して入力・管理できます。各タブには入力の完成度ゲージが表示されます。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>構造化データの自動出力</h3>
+                    <p>ProfilePage + Person を中核に、学術論文・書籍・特許・取材・講演などを schema.org 型の JSON-LD として自動出力します。パンくず (BreadcrumbList) や speakable にも対応します。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>URL と表示順のカスタマイズ</h3>
+                    <p><code>/profile/</code> や <code>/member/</code> など複数の URL プレフィックスを登録でき、プレフィックス変更時は 301 リダイレクトで旧 URL を保全します。表示順プリセットも切り替えできます。</p>
+                </div>
+            </div>
+        </section>
+
+        <figure class="infographic">
+            <img src="images/infographics/overview-flow.png" alt="プロフィール作成から構造化データ出力までの全体ワークフロー">
+            <figcaption>図: プロフィール入力から構造化データ出力までの流れ</figcaption>
+        </figure>
+
+        <section>
+            <h2>このプラグインでできること</h2>
+            <ul>
+                <li>人物プロフィールを専用の投稿タイプとして作成・管理する</li>
+                <li>著作・論文・特許・取材・講演などの実績を schema.org でマークアップする</li>
+                <li>Google リッチリザルト / AI 検索に認識されやすい構造化データを自動生成する</li>
+                <li>プロフィールページの URL 階層 (プレフィックス) を自由に設計する</li>
+                <li>ショートコードで任意の固定ページ・投稿にプロフィールを埋め込む</li>
+                <li>個人情報 (生年月日・性別など) の公開・非公開を項目単位で制御する</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>目次</h2>
+            <ul>
+                <li><a href="index.html">概要</a> - プラグインの概要と主要機能の紹介</li>
+                <li><a href="setup.html">インストール・初期設定</a> - インストール手順と管理画面の構成</li>
+                <li><a href="profile.html">プロフィールの作成・編集</a> - 9 タブの入力フォームの使い方</li>
+                <li><a href="structured-data.html">構造化データ (JSON-LD)</a> - schema.org 出力と設定</li>
+                <li><a href="url-settings.html">設定（全オプション）</a> - URL プレフィックスと表示順プリセット</li>
+                <li><a href="custom-blocks.html">カスタムブロックとショートコード</a> - 汎用ブロックと埋め込み</li>
+                <li><a href="troubleshooting.html">トラブルシューティング</a> - よくある問題と解決方法</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>動作要件</h2>
+            <ul>
+                <li>WordPress 6.0 以上</li>
+                <li>PHP 8.0 以上</li>
+                <li>PHP の DOMDocument (ext-dom) 拡張 (HTML 正規化・表示順制御に使用)</li>
+            </ul>
+        </section>
+
+        <nav class="page-nav">
+            <span></span>
+            <a href="setup.html" class="next">インストール・初期設定 &raquo;</a>
+        </nav>
+
+        <footer class="manual-footer">
+            <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+        </footer>
+    </main>
+
+    <div class="lightbox"></div>
+    <script src="js/manual.js?v=1"></script>
+</body>
+</html>

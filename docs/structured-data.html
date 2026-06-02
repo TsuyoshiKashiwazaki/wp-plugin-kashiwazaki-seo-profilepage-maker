@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>構造化データ (JSON-LD) - ProfilePage Maker マニュアル</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+    <button class="hamburger-btn" aria-label="メニューを開く">&#9776;</button>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color:#fff;">ProfilePage Maker</h2>
+            <span class="version">v1.0.0</span>
+            <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
+        </div>
+        <ul>
+            <li><a href="index.html">概要</a></li>
+            <li><a href="setup.html">インストール・初期設定</a></li>
+            <li><a href="profile.html">プロフィールの作成・編集</a></li>
+            <li><a href="structured-data.html">構造化データ (JSON-LD)</a></li>
+            <li><a href="url-settings.html">設定（全オプション）</a></li>
+            <li><a href="custom-blocks.html">カスタムブロックとショートコード</a></li>
+            <li><a href="troubleshooting.html">トラブルシューティング</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <h1>構造化データ (JSON-LD)</h1>
+        <p class="lead">入力したプロフィール情報は、schema.org 準拠の JSON-LD としてプロフィールページに自動出力されます。Google リッチリザルトや AI 検索 (AI Overviews / Perplexity 等) が人物情報を正確に理解できるようになります。</p>
+
+        <section>
+            <h2>出力される schema.org の型</h2>
+            <p>ページ自体を表す <strong>ProfilePage</strong> と、人物を表す <strong>Person</strong> を中核に、入力した実績が以下の型としてマークアップされます。</p>
+            <table>
+                <thead>
+                    <tr><th>入力した内容</th><th>schema.org の型 / プロパティ</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>ページ全体</td><td>ProfilePage</td></tr>
+                    <tr><td>人物 (氏名・肩書・自己紹介など)</td><td>Person</td></tr>
+                    <tr><td>SNS・外部プロフィール</td><td>Person.sameAs</td></tr>
+                    <tr><td>現職・所属</td><td>Person.worksFor (Organization)</td></tr>
+                    <tr><td>学歴</td><td>Person.alumniOf (EducationalOrganization)</td></tr>
+                    <tr><td>資格・認定</td><td>Person.hasCredential (EducationalOccupationalCredential)</td></tr>
+                    <tr><td>受賞・表彰</td><td>Person.award</td></tr>
+                    <tr><td>専門分野・言語・スキル</td><td>Person.knowsAbout / knowsLanguage / skills</td></tr>
+                    <tr><td>書籍</td><td>Person.owns (Book)</td></tr>
+                    <tr><td>学術論文</td><td>Person.owns (ScholarlyArticle)</td></tr>
+                    <tr><td>特許</td><td>Person.owns (CreativeWork)</td></tr>
+                    <tr><td>取材・執筆・監修</td><td>Person.subjectOf (Article)</td></tr>
+                    <tr><td>講演・セミナー</td><td>Person.performerIn (Event)</td></tr>
+                    <tr><td>パンくず</td><td>BreadcrumbList</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>構造化データの設定</h2>
+            <p>「設定」タブの <strong>構造化データ (JSON-LD)</strong> セクションで、出力の有無や挙動を調整できます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/04-settings-jsonld.png" alt="設定画面の構造化データ (JSON-LD) セクション" class="lightbox-trigger">
+                <figcaption>図: JSON-LD の出力設定 (出力 ON/OFF・出力位置・speakable・パンくず)</figcaption>
+            </figure>
+            <ul>
+                <li><strong>JSON-LD を出力する</strong> — ProfilePage + Person の構造化データをフロントに自動出力します。</li>
+                <li><strong>出力位置</strong> — 通常は <code>wp_head</code> (推奨)。テーマやキャッシュ系プラグインと head 出力が衝突する場合のみ <code>footer</code> を選びます。</li>
+                <li><strong>speakable プロパティを出力する</strong> — AI 音声読み上げ (LLMO) 向けに、見出しや概要を speakable として指定します。</li>
+                <li><strong>BreadcrumbList を自動出力する</strong> — 「ホーム → 個人名」を基本としたパンくず構造化データを出力します。プレフィックスのアーカイブページが実在する場合は、中間に「プロフィール」相当の階層も含めます。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>フロントでの表示例</h2>
+            <p>入力した経歴・実績は、構造化データと同時に読みやすいテーブルやリストとしてフロントにも表示されます。</p>
+            <figure class="screenshot">
+                <img src="images/screenshots/08-frontend-works.png" alt="フロントに表示された現職・所属と以前の経歴のセクション" class="lightbox-trigger">
+                <figcaption>図: フロントに表示された経歴セクション — 現職・所属と以前の経歴 (組織名・役職・在任期間)</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>出力の確認方法</h2>
+            <p>プロフィールを公開したあと、その URL を <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Google リッチリザルトテスト</a> に入力すると、出力された構造化データを検証できます。</p>
+            <div class="callout callout-tip">
+                <p>リッチリザルトテストは構造 (文法) を検証するもので、内容の正しさ (タイトルと要旨が一致しているか等) は検証しません。入力内容そのものは公開前にご自身で確認してください。</p>
+            </div>
+        </section>
+
+        <nav class="page-nav">
+            <a href="profile.html" class="prev">&laquo; プロフィールの作成・編集</a>
+            <a href="url-settings.html" class="next">設定（全オプション） &raquo;</a>
+        </nav>
+
+        <footer class="manual-footer">
+            <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+        </footer>
+    </main>
+
+    <div class="lightbox"></div>
+    <script src="js/manual.js?v=1"></script>
+</body>
+</html>
