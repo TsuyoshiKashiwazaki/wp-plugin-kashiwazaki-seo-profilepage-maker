@@ -99,10 +99,8 @@ if ( $display_name === '' ) $display_name = get_the_title( $post_id );
 		if ( empty( $items ) ) return;
 		// (v0.0.22-beta): url 列除外 + 名称セル anchor 化
 		// v0.0.24-beta: 全行で空の列 (image 等) は表ごと非表示 (ユーザー指示: 設定されてない場合は項目を出さない)
-		$display_columns = array_values( array_filter( $columns, function ( $c ) use ( $items, $id ) {
+		$display_columns = array_values( array_filter( $columns, function ( $c ) use ( $items ) {
 			if ( $c['key'] === 'url' ) return false; // url は常に anchor に変換 (表示列ではない)
-			// works_for の end_date は「空=現在」セマンティクスのため列を常に表示
-			if ( $id === 'ksppm-career' && $c['key'] === 'end_date' ) return true;
 			foreach ( $items as $row ) {
 				if ( ! empty( $row[ $c['key'] ] ) ) return true; // 1 行でも値あれば列表示
 			}
@@ -111,8 +109,6 @@ if ( $display_name === '' ) $display_name = get_the_title( $post_id );
 		// anchor_key は image を除く最初の text 列
 		$anchor_candidates = array_values( array_filter( $display_columns, function ( $c ) { return $c['key'] !== 'image'; } ) );
 		$anchor_key = ! empty( $anchor_candidates ) ? $anchor_candidates[0]['key'] : 'name';
-		// v0.0.23-beta: works_for (id=ksppm-career) のみ end_date 空時に「現在」表示 (page 7 表記揃え)
-		$is_current_career = ( $id === 'ksppm-career' );
 		?>
 		<section class="ksppm-section" id="<?php echo esc_attr( $id ); ?>">
 			<<?php echo esc_attr( $h_section ); ?>><?php echo esc_html( $title ); ?></<?php echo esc_attr( $h_section ); ?>>
@@ -131,8 +127,6 @@ if ( $display_name === '' ) $display_name = get_the_title( $post_id );
 									$anchor_text = $v !== '' ? $v : ( wp_parse_url( $row_url, PHP_URL_HOST ) ?: $row_url );
 									?>
 									<a href="<?php echo esc_url( $row_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $anchor_text ); ?></a>
-								<?php elseif ( $is_current_career && $c['key'] === 'end_date' && $v === '' ) : ?>
-									<?php esc_html_e( '現在', 'kashiwazaki-seo-profilepage-maker' ); ?>
 								<?php else : ?>
 									<?php echo esc_html( $v ); ?>
 								<?php endif; ?>
@@ -147,19 +141,26 @@ if ( $display_name === '' ) $display_name = get_the_title( $post_id );
 	};
 
 	if ( $show( 'career' ) ) :
-		$render_repeater( __( '現職・所属', 'kashiwazaki-seo-profilepage-maker' ), 'ksppm-career', $data['works_for'] ?? array(), array(
+		// 在任期間: 開始日と終了日を 1 列にまとめて出す (現職で終了日が空の行は「開始日 ～ 現在」)。
+		$with_period = function ( $rows, $is_current ) {
+			if ( empty( $rows ) || ! is_array( $rows ) ) return array();
+			foreach ( $rows as $i => $row ) {
+				if ( is_array( $row ) ) {
+					$rows[ $i ]['period'] = KSPPM_Frontend::format_period( $row['start_date'] ?? '', $row['end_date'] ?? '', $is_current );
+				}
+			}
+			return $rows;
+		};
+		$render_repeater( __( '現職・所属', 'kashiwazaki-seo-profilepage-maker' ), 'ksppm-career', $with_period( $data['works_for'] ?? array(), true ), array(
 			array( 'key' => 'name', 'label' => __( '組織名', 'kashiwazaki-seo-profilepage-maker' ) ),
 			array( 'key' => 'role', 'label' => __( '役職', 'kashiwazaki-seo-profilepage-maker' ) ),
-			array( 'key' => 'start_date', 'label' => __( '在任開始', 'kashiwazaki-seo-profilepage-maker' ) ),
-			array( 'key' => 'end_date', 'label' => __( '在任終了', 'kashiwazaki-seo-profilepage-maker' ) ),
+			array( 'key' => 'period', 'label' => __( '在任期間', 'kashiwazaki-seo-profilepage-maker' ) ),
 			array( 'key' => 'url', 'label' => __( 'URL', 'kashiwazaki-seo-profilepage-maker' ) ),
 		) );
-		$render_repeater( __( '以前の経歴', 'kashiwazaki-seo-profilepage-maker' ), 'ksppm-past', $data['past_career'] ?? array(), array(
+		$render_repeater( __( '以前の経歴', 'kashiwazaki-seo-profilepage-maker' ), 'ksppm-past', $with_period( $data['past_career'] ?? array(), false ), array(
 			array( 'key' => 'name', 'label' => __( '組織名', 'kashiwazaki-seo-profilepage-maker' ) ),
 			array( 'key' => 'role', 'label' => __( '役職', 'kashiwazaki-seo-profilepage-maker' ) ),
-			// v0.0.23-beta: works_for と label を統一
-			array( 'key' => 'start_date', 'label' => __( '在任開始', 'kashiwazaki-seo-profilepage-maker' ) ),
-			array( 'key' => 'end_date', 'label' => __( '在任終了', 'kashiwazaki-seo-profilepage-maker' ) ),
+			array( 'key' => 'period', 'label' => __( '在任期間', 'kashiwazaki-seo-profilepage-maker' ) ),
 		) );
 		$render_repeater( __( '学歴', 'kashiwazaki-seo-profilepage-maker' ), 'ksppm-alumni', $data['alumni_of'] ?? array(), array(
 			array( 'key' => 'name', 'label' => __( '学校名', 'kashiwazaki-seo-profilepage-maker' ) ),
@@ -422,7 +423,7 @@ if ( $display_name === '' ) $display_name = get_the_title( $post_id );
 					</ul>
 				<?php endif; ?>
 				<?php if ( $has_hobbies ) : ?>
-					<p class="ksppm-hobbies-text"><?php echo esc_html( $data['hobbies'] ); ?></p>
+					<p class="ksppm-hobbies-text"><?php echo KSPPM_Frontend::format_text_with_links( $data['hobbies'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- 関数内で esc_html / esc_url 済み ?></p>
 				<?php endif; ?>
 			</section>
 		<?php endif; ?>

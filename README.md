@@ -1,6 +1,6 @@
 # Kashiwazaki SEO ProfilePage Maker
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue.svg)
 ![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue.svg)
 ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-green.svg)

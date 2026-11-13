@@ -11,7 +11,7 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <h2 style="color:#fff;">ProfilePage Maker</h2>
-            <span class="version">v1.0.0</span>
+            <span class="version">v1.0.1</span>
             <img src="images/main-visual.png" alt="" style="width:100%;border-radius:4px;margin-top:8px;">
         </div>
         <ul>
@@ -137,9 +137,15 @@
                     <tr><td>学歴</td><td>学校名 / 学校 URL / 学位 / 卒業年月</td><td>Person.alumniOf (EducationalOrganization)</td></tr>
                     <tr><td>資格・認定</td><td>資格名 / 発行機関 / 取得日 / 有効期限 / 証明 URL</td><td>Person.hasCredential</td></tr>
                     <tr><td>受賞・表彰</td><td>賞名 / 受賞日 / 授与機関 / 関連 URL</td><td>Person.award</td></tr>
-                    <tr><td>趣味・特技</td><td>テキストエリア (1 項目)</td><td>出力 —</td></tr>
+                    <tr><td>趣味・特技</td><td>テキストエリア (1 項目)。<code>[表示名](https://example.com/)</code> の形で書いた部分はリンクになります</td><td>出力 —</td></tr>
                 </tbody>
             </table>
+            <div class="callout callout-tip">
+                <p><strong>フロントでの在任期間の表示:</strong> 「現職・所属組織」と「以前の経歴」の在任開始・在任終了は、フロントでは「在任期間」の 1 列にまとめて <code>2012-06-26 ～ 2019-06-30</code> のように表示されます。現職・所属組織で在任終了を空にした行は <code>2012-06-26 ～ 現在</code> と表示されます。どちらか片方だけ入力した行は <code>2015-02-01 ～</code> のように入力した側だけを表示し、どちらも入力していない行は空欄になります。すべての行が空欄のときは「在任期間」の列そのものを表示しません。</p>
+            </div>
+            <div class="callout callout-tip">
+                <p><strong>趣味・特技にリンクを入れる:</strong> 趣味・特技の文中で <code>[表示名](https://example.com/)</code> と書くと、「表示名」の部分がリンクになります (例: <code>陶芸 ([工房のサイト](https://example.com/))</code>)。リンクにできるのは <code>http://</code> または <code>https://</code> で始まる URL だけで、リンクは新しいタブで開きます。表示名に角かっこ <code>[ ]</code> は使えません。URL に半角スペースや丸かっこ <code>( )</code> が含まれるとリンクにならないため、丸かっこは <code>%28</code> <code>%29</code> に置き換えてください。HTML タグは使えません (入力したタグはそのまま文字として表示されます)。</p>
+            </div>
         </section>
 
         <section id="tab-expertise">
@@ -236,7 +242,7 @@
 
         <footer class="manual-footer">
             <p>作者: <a href="https://www.tsuyoshikashiwazaki.jp/profile/" target="_blank" rel="noopener">柏崎剛 (Tsuyoshi Kashiwazaki)</a></p>
-            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.0</p>
+            <p>プラグイン: Kashiwazaki SEO ProfilePage Maker v1.0.1</p>
         </footer>
     </main>
 

@@ -3,7 +3,7 @@
  * Plugin Name: Kashiwazaki SEO ProfilePage Maker
  * Plugin URI: https://www.tsuyoshikashiwazaki.jp
  * Description: schema.org ProfilePage / Person 構造化データを完備した SEO・E-E-A-T 強化型プロフィールページ生成プラグイン。人物の知的資産 (著作・特許・論文・取材・登壇) を機械可読化し、Google Knowledge Graph と AI 検索の双方から認知される Authority Page を作成します。
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: 柏崎剛 (Tsuyoshi Kashiwazaki)
  * Author URI: https://www.tsuyoshikashiwazaki.jp/profile/
  * License: GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KSPPM_VERSION', '1.0.0' );
+define( 'KSPPM_VERSION', '1.0.1' );
 define( 'KSPPM_PLUGIN_FILE', __FILE__ );
 define( 'KSPPM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'KSPPM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

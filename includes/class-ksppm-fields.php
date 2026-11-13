@@ -108,7 +108,7 @@ class KSPPM_Fields {
 						array( 'key' => 'issuer',      'label' => __( '授与機関', 'kashiwazaki-seo-profilepage-maker' ), 'type' => 'text' ),
 						array( 'key' => 'url',         'label' => __( '関連 URL', 'kashiwazaki-seo-profilepage-maker' ), 'type' => 'url' ),
 					) ),
-					array( 'key' => 'hobbies', 'label' => __( '趣味・特技', 'kashiwazaki-seo-profilepage-maker' ), 'type' => 'textarea', 'schema_property' => null ),
+					array( 'key' => 'hobbies', 'label' => __( '趣味・特技', 'kashiwazaki-seo-profilepage-maker' ), 'type' => 'textarea', 'schema_property' => null, 'help' => __( '「[表示名](https://example.com/)」の形で書くと、その部分がリンクになります。', 'kashiwazaki-seo-profilepage-maker' ) ),
 				),
 			),
 			'expertise' => array(

@@ -202,6 +202,63 @@ class KSPPM_Frontend {
 	}
 
 	/**
+	 * プレーンテキストを出力用に整える。全体を HTML エスケープしたうえで、
+	 * 「[表示名](https://example.com/)」の書き方だけをリンクに変える。
+	 *
+	 * - HTML タグは使えない (すべてエスケープされて文字として表示される)。
+	 * - リンク先は http / https のみ。それ以外 (javascript: 等) はリンクにせず文字のまま残す。
+	 * - 戻り値はエスケープ済みの HTML。呼び出し側でさらにエスケープしない。
+	 *
+	 * @param string $text 入力テキスト (保存値そのまま)
+	 * @return string エスケープ済み HTML
+	 */
+	public static function format_text_with_links( $text ) {
+		$escaped = esc_html( (string) $text );
+		if ( strpos( $escaped, '](' ) === false ) {
+			return $escaped;
+		}
+		$converted = preg_replace_callback(
+			'/\[([^\[\]\r\n]+)\]\((https?:\/\/[^\s()]+)\)/u',
+			function ( $m ) {
+				// $m はエスケープ後の文字列から取っているので、URL だけ実体参照を戻してから esc_url にかける。
+				$url = esc_url( html_entity_decode( $m[2], ENT_QUOTES, 'UTF-8' ), array( 'http', 'https' ) );
+				if ( '' === $url ) {
+					return $m[0];
+				}
+				return '<a href="' . $url . '" target="_blank" rel="noopener">' . $m[1] . '</a>';
+			},
+			$escaped
+		);
+		// 不正な UTF-8 などで preg が失敗したら、リンク化せずエスケープ済みの文字列を返す。
+		return is_string( $converted ) ? $converted : $escaped;
+	}
+
+	/**
+	 * 在任期間の表示文字列を作る (「開始日 ～ 終了日」)。
+	 *
+	 * 現職 ($is_current = true) で終了日が空のときは、終了日の位置に「現在」を出す。
+	 * 開始日も終了日も空なら空文字を返す (全行が空なら列ごと出さない判定に使う)。
+	 * 戻り値はエスケープしていないので、出力側で esc_html() にかけること。
+	 *
+	 * @param string $start      開始日 (保存値そのまま)
+	 * @param string $end        終了日 (保存値そのまま)
+	 * @param bool   $is_current 現職の行なら true
+	 * @return string 表示文字列 (未エスケープ)
+	 */
+	public static function format_period( $start, $end, $is_current = false ) {
+		$start = trim( (string) $start );
+		$end   = trim( (string) $end );
+		if ( '' === $end && $is_current && '' !== $start ) {
+			$end = __( '現在', 'kashiwazaki-seo-profilepage-maker' );
+		}
+		if ( '' === $start && '' === $end ) {
+			return '';
+		}
+		/* translators: 1: start date, 2: end date (or the word for "present") */
+		return trim( sprintf( __( '%1$s ～ %2$s', 'kashiwazaki-seo-profilepage-maker' ), $start, $end ) );
+	}
+
+	/**
 	 * Render the profile (used by both single template and shortcode)
 	 *
 	 * 認可: post_type が KSPPM_CPT 以外 / draft/private を read 権限なしで表示しないよう保護

@@ -4,7 +4,7 @@ Tags: seo, schema, structured-data, profile, json-ld
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,10 +46,17 @@ WordPress 6.0 以上、PHP 8.0 以上です。
 
 == Changelog ==
 
+= 1.0.1 =
+* 「趣味・特技」に [表示名](https://example.com/) の形で書くと、その部分がリンクとして表示されるようにしました。
+* フロントの「現職・所属」「以前の経歴」の表で、「在任開始」「在任終了」の 2 列を「在任期間」の 1 列にまとめました（例: 2012-06-26 ～ 現在）。
+
 = 1.0.0 =
 * 初回リリース。
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+フロントの経歴の表が「在任期間」の 1 列表示に変わります。趣味・特技にリンクを書けるようになりました。
 
 = 1.0.0 =
 初回リリースです。
